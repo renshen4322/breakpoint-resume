@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script type="text/javascript" src="@Url.Content("~/Content/Component/plupload_2_1_2/jquery.js")" charset="UTF-8"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/Component/plupload_2_1_2/pB.js")" charset="UTF-8"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/Component/plupload_2_1_2/jquery-ui.min.js")" charset="UTF-8"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/Component/plupload_2_1_2/plupload.full.min.js")" charset="UTF-8"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/Component/plupload_2_1_2/jquery.ui.plupload/jquery.ui.plupload.js")" charset="UTF-8"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/Component/plupload_2_1_2/zh_CN.js")" charset="UTF-8"></script>
+    <link type="text/css" rel="stylesheet" href="@Url.Content("~/Content/Component/plupload_2_1_2/jquery-ui.min.css")" media="screen"/>
+    <link type="text/css" rel="stylesheet" href="@Url.Content("~/Content/Component/plupload_2_1_2/jquery.ui.plupload/css/jquery.ui.plupload.css")" media="screen"/>
+    <style type="text/css">
+        .plupload_logo
+        {
+             background-image:none;
+        }
+    </style>
+</head>
+<body>
+    <div id="uploader" style="height:600px">
+        <p>你的浏览器不支持HTML5,Flash,或silverlight,请升级浏览器或联系管理员</p>
+    </div>
+    <script type="text/javascript">
+        // 初始化
+        $(function () {
+            $("#uploader").plupload({
+                runtimes: 'html5,flash,silverlight,html4', // 这里是说用什么技术引擎
+                url: '@Url.Content("~/Home/plupload")',   // 服务端上传路径
+                max_file_size: '6097mb', // 文件上传最大限制。
+                max_file_count: 20,     //指示用户可以同时上传文件的最大数量
+                chunk_size: '1mb', // 上传分块每块的大小，这个值小于服务器最大上传限制的值即可。
+
+                // 是否生成缩略图（仅对图片文件有效）
+                resize: {
+                    width: 200,
+                    height: 200,
+                    quality: 90,
+                    crop: true // crop to exact dimensions
+                },
+
+                //  这个数组是选择器，就是上传文件时限制的上传文件类型
+                filters: [
+			{ title: "Image files", extensions: "jpg,gif,png,mp4,rmvb,txt" },
+			{ title: "Zip files", extensions: "zip,avi,rar" }
+		],
+                rename: true, // 是否重命名文件
+                sortable: true, // Sort files
+                dragdrop: false, //启用文件到小部件能够拖放(操作)(目前唯一HTML5支持)
+
+                // Views to activate
+                views: {
+                    list: true,
+                    thumbs: true, // Show thumbs
+                    active: 'thumbs'
+                },
+
+                // plupload.flash.swf 的所在路径
+                flash_swf_url: '@Url.Content("~/Content/Component/plupload_2_1_2/Moxie.swf")',
+
+                // silverlight所在路径
+                silverlight_xap_url: '@Url.Content("~/Content/Component/plupload_2_1_2/Moxie.xap")'
+            });
+        });
+    </script>
+</body>
+</html>
